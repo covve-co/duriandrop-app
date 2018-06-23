@@ -1,0 +1,118 @@
+import 'package:flutter/material.dart';
+import 'list.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong/latlong.dart';
+import 'package:location/location.dart';
+
+class MapPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var location = new LatLng(1.312576, 103.864188);
+    return new Scaffold(
+        backgroundColor: Colors.white,
+        floatingActionButton: new FloatingActionButton(
+          onPressed: () {
+            Navigator.of(context).pushReplacement(new PageRouteBuilder(
+                opaque: true,
+                pageBuilder: (BuildContext context, _, __) {
+                  return new ListPage();
+                },
+                transitionDuration: const Duration(milliseconds: 300),
+                transitionsBuilder:
+                    (_, Animation<double> animation, __, Widget child) {
+                  return new FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                }));
+          },
+          child: new Icon(Icons.list, color: Theme.of(context).primaryColor),
+        ),
+        appBar: new AppBar(
+            title: new Container(
+                child: new Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            new Container(
+                width: 48.0,
+                height: 48.0,
+                padding: EdgeInsets.all(8.0),
+                child: new Image.asset('assets/images/logo.png')),
+            new Text(
+              "DurianDrop",
+              style: new TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w700),
+            )
+          ],
+        ))),
+        body: new Center(
+          child: new FlutterMap(
+            options: new MapOptions(
+              center: location,
+              zoom: 15.0,
+            ),
+            layers: [
+              new TileLayerOptions(
+                urlTemplate: "https://api.tiles.mapbox.com/v4/"
+                    "{id}/{z}/{x}/{y}@2x.png?access_token=pk.eyJ1IjoiY292dmVvcHMiLCJhIjoiY2ppcmJra2dvMWttMjNqcmZ5bGN5NjdwMiJ9.peIQQbrFTXdgvdnriIgBdw",
+                additionalOptions: {
+                  'accessToken':
+                      '<pk.eyJ1IjoiY292dmVvcHMiLCJhIjoiY2ppcmJra2dvMWttMjNqcmZ5bGN5NjdwMiJ9.peIQQbrFTXdgvdnriIgBdw>',
+                  'id': 'mapbox.streets',
+                },
+              ),
+              new MarkerLayerOptions(
+                markers: [
+                  new Marker(
+                    width: 32.0,
+                    height: 32.0,
+                    point: location,
+                    builder: (ctx) => new Icon(
+                          Icons.location_on,
+                          color: Colors.red,
+                        ),
+                  ),
+                  new Marker(
+                    width: 32.0,
+                    height: 32.0,
+                    point: new LatLng(0.0, 0.0),
+                    builder: (ctx) => new Container(
+                          child: new Image.asset('assets/images/map-icon.png'),
+                        ),
+                  ),
+                  //Durian King Fruits
+                  new Marker(
+                    width: 32.0,
+                    height: 32.0,
+                    point: new LatLng(1.316625, 103.857760),
+                    builder: (ctx) => new Container(
+                          child: new Image.asset('assets/images/map-icon.png'),
+                        ),
+                  ),
+                  //Sindy Durian
+                  new Marker(
+                    width: 32.0,
+                    height: 32.0,
+                    point: new LatLng(1.323732, 103.854964),
+                    builder: (ctx) => new Container(
+                          child: new Image.asset('assets/images/map-icon.png'),
+                        ),
+                  ),
+                  //Durian Culture
+                  new Marker(
+                    width: 32.0,
+                    height: 32.0,
+                    point: new LatLng(1.313912, 103.877009),
+                    builder: (ctx) => new Container(
+                          child: new Image.asset('assets/images/map-icon.png'),
+                        ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ));
+  }
+}
