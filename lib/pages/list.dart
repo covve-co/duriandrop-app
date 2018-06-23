@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'map.dart';
 import '../database/database.dart';
 import '../database/seller.dart';
+import './detail.dart';
 
 class ListPage extends StatelessWidget {
   @override
@@ -26,57 +27,123 @@ class ListPage extends StatelessWidget {
         child: new Icon(Icons.map, color: Theme.of(context).primaryColor),
       ),
       appBar: new AppBar(
+          actions: <Widget>[
+            new IconButton(
+              icon: new Icon(Icons.shopping_basket, color: Colors.white),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/Order');
+              },
+            )
+          ],
           title: new Container(
               child: new Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          new Container(
-              width: 48.0,
-              height: 48.0,
-              padding: EdgeInsets.all(8.0),
-              child: new Image.asset('assets/images/logo.png')),
-          new Text(
-            "DurianDrop",
-            style: new TextStyle(
-                color: Colors.white,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w700),
-          )
-        ],
-      ))),
-      body: _buildList(),
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              new Container(
+                  width: 48.0,
+                  height: 48.0,
+                  padding: EdgeInsets.all(8.0),
+                  child: new Image.asset('assets/images/logo.png')),
+              new Text(
+                "DurianDrop",
+                style: new TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700),
+              )
+            ],
+          ))),
+      body: _buildList(context),
     );
   }
 
-  Widget _buildList() {
+  Widget _buildList(BuildContext context) {
     final sellers = Database.sellers;
     return new ListView.builder(
       padding: const EdgeInsets.all(16.0),
-      itemCount: sellers.length,
+      itemCount: sellers.length * 2 - 1,
       itemBuilder: (context, i) {
-        // if (i.isOdd) return new Divider(color: Theme.of(context).primaryColor);
-        // final index = i ~/ 2;
-        return _buildRow(sellers[i]);
+        if (i.isOdd) return new Divider(color: Theme.of(context).primaryColor);
+        final index = i ~/ 2;
+        return _buildRow(context, sellers[index]);
       },
     );
   }
 
-  Widget _buildRow(Seller seller) {
-    return new Container(
-      padding: EdgeInsets.all(10.0),
+  Widget _buildRow(BuildContext context, Seller seller) {
+    final _titleStyle = new TextStyle(color: Theme.of(context).primaryColor);
+    final _addressStyle =
+        new TextStyle(color: Colors.black, fontWeight: FontWeight.w400);
+    return new InkWell(
+      onTap: () {
+        Navigator.of(context).push(new MaterialPageRoute(
+            builder: (context) => new DetailPage(seller)));
+      },
       child: new Row(
-        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           new Container(child: new Image.asset(seller.image)),
-          new Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              new Text(seller.name),
-              // new Text("$rating"),
-            ],
-          )
+          new Container(
+            child: new Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Container(
+                  padding: EdgeInsets.only(left: 10.0),
+                  child: new Text(seller.name, style: _titleStyle),
+                ),
+                new Container(
+                    padding: EdgeInsets.only(left: 10.0),
+                    child: new Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        new Icon(Icons.location_on, color: Colors.red),
+                        new Text(seller.address, style: _addressStyle),
+                      ],
+                    )),
+                new Container(
+                  padding: EdgeInsets.only(left: 10.0),
+                  child: new Row(
+                    children: _buildStars(context, seller.rating()),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  List<Widget> _buildStars(BuildContext context, num rating) {
+    var stars = <Widget>[];
+
+    var i;
+    for (i = 0; i < rating.floor(); i++) {
+      stars.add(new Container(
+        width: 25.0,
+        height: 25.0,
+        child: new Image.asset("assets/images/star-full.png"),
+      ));
+    }
+
+    if (rating - i > 0.0) {
+      stars.add(new Container(
+        width: 25.0,
+        height: 25.0,
+        child: new Image.asset("assets/images/star-half.png"),
+      ));
+    }
+
+    for (var j = 0; j < 5 - i; j++) {
+      stars.add(new Container(
+        width: 25.0,
+        height: 25.0,
+        child: new Image.asset("assets/images/star-empty.png"),
+      ));
+    }
+
+    return stars;
   }
 }

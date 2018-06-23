@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import './landing.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -19,7 +20,9 @@ class SplashPageState extends State<SplashPage> {
   }
 
   void redirectLanding() {
-    Navigator.of(context).pushReplacementNamed('/Map');
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) {
+      return LandingPage();
+    }));
   }
 
   @override
@@ -30,11 +33,13 @@ class SplashPageState extends State<SplashPage> {
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            new Container(
-              width: 128.0,
-              height: 128.0,
-              child: Image.asset("assets/images/logo.png"),
-            ),
+            new Hero(
+                tag: 'logo',
+                child: new Container(
+                  width: 128.0,
+                  height: 128.0,
+                  child: Image.asset("assets/images/logo.png"),
+                )),
             new Container(
               padding: EdgeInsets.all(24.0),
               child: new Center(

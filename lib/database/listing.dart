@@ -10,5 +10,9 @@ class Listing {
   String image;
   num price;
 
-  Listing(this.id, this.type, this.image, this.price);
+  Listing(this.id, this.type, this.image, this.price) {
+    if (image == null) {
+      image = 'assets/images/durian-badge.png';
+    }
+  }
 }

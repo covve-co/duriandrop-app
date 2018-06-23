@@ -1,3 +1,5 @@
+import './database.dart';
+
 class Review {
   String id;
   num rating;
@@ -8,4 +10,11 @@ class Review {
     this.rating,
     this.description,
   );
+
+  String username() {
+    return Database.users
+        .where((user) => user.reviews.contains(this))
+        .toList()[0]
+        .name;
+  }
 }

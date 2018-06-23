@@ -4,6 +4,7 @@ import './pages/landing.dart';
 import './pages/map.dart';
 import './pages/splash.dart';
 import './pages/list.dart';
+import './pages/order.dart';
 
 void main() => runApp(new App());
 
@@ -22,8 +23,8 @@ class App extends StatelessWidget {
         '/Map': (BuildContext context) => new MapPage(),
         '/Splash': (BuildContext context) => new SplashPage(),
         '/Landing': (BuildContext context) => new LandingPage(),
-        '/Detail': (BuildContext context) => new DetailPage(),
         '/List': (BuildContext context) => new ListPage(),
+        '/Order': (BuildContext context) => new OrderPage(),
       },
       theme: new ThemeData(
         fontFamily: 'Poppins',

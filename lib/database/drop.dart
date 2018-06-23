@@ -2,7 +2,7 @@ class Drop {
   String id;
   String type;
   num price;
-  DateTime deadline;
+  int deadline;
 
   Drop(
     this.id,
