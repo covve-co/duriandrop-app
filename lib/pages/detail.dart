@@ -198,7 +198,7 @@ class DetailPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           new Container(child: new Image.asset(listing.image)),
-          new Container(
+          new Flexible(child: new Container(
             padding: EdgeInsets.only(top: 10.0),
             child: new Column(
               mainAxisSize: MainAxisSize.max,
@@ -222,7 +222,7 @@ class DetailPage extends StatelessWidget {
                 ),
               ],
             ),
-          ),
+          )),
         ],
       ),
     );
