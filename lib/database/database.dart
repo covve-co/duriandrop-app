@@ -56,16 +56,20 @@ class Database {
   ];
 
   static final listings = [
-    new Listing("0", maoShanWang, "assets/images/durian-MSW.png", 17.5),
-    new Listing("1", d1, "assets/images/durian-D1.png", 21.5),
-    new Listing("2", d101, "assets/images/durian-D101.png", 54.5),
-    new Listing("3", maoShanWang, "assets/images/durian-MSW.png", 32.4),
-    new Listing("4", d1, "assets/images/durian-D1.png", 23.1),
-    new Listing("5", maoShanWang, "assets/images/durian-MSW.png", 53.2),
-    new Listing("6", d101, "assets/images/durian-D101.png", 12.5),
-    new Listing("7", d1, "assets/images/durian-D1.png", 5.7),
-    new Listing("8", d101, "assets/images/durian-D101.png", 12.22),
-    new Listing("9", maoShanWang, "assets/images/durian-MSW.png", 30.34),
+    new Listing("0", maoShanWangDesc, maoShanWang,
+        "assets/images/durian-MSW.png", 17.5),
+    new Listing("1", d1Desc, d1, "assets/images/durian-D1.png", 21.5),
+    new Listing("2", d101Desc, d101, "assets/images/durian-D101.png", 54.5),
+    new Listing("3", maoShanWangDesc, maoShanWang,
+        "assets/images/durian-MSW.png", 32.4),
+    new Listing("4", d1Desc, d1, "assets/images/durian-D1.png", 23.1),
+    new Listing("5", maoShanWangDesc, maoShanWang,
+        "assets/images/durian-MSW.png", 53.2),
+    new Listing("6", d101Desc, d101, "assets/images/durian-D101.png", 12.5),
+    new Listing("7", d1Desc, d1, "assets/images/durian-D1.png", 5.7),
+    new Listing("8", d101Desc, d101, "assets/images/durian-D101.png", 12.22),
+    new Listing("9", maoShanWangDesc, maoShanWangDesc,
+        "assets/images/durian-MSW.png", 30.34),
   ];
 
   static final sellers = <Seller>[

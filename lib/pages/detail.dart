@@ -3,6 +3,7 @@ import '../database/seller.dart';
 import '../database/listing.dart';
 import '../database/review.dart';
 import '../database/drop.dart';
+import './drop.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 class DetailPage extends StatelessWidget {
@@ -13,38 +14,40 @@ class DetailPage extends StatelessWidget {
     // TODO: implement build
     return new Scaffold(
       appBar: new AppBar(
+          iconTheme: new IconThemeData(color: Colors.white),
           title: new Container(
               child: new Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          new Hero(
-              tag: "icon-${this.seller.id}",
-              child: new Container(
-                  width: 60.0,
-                  height: 60.0,
-                  padding: EdgeInsets.all(8.0),
-                  child: new Image.asset('assets/images/durian-badge.png'))),
-          new Container(
-              child: new Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                new Text(
-                  this.seller.name,
-                  style: new TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600),
-                ),
-                new Container(
-                  child: new Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: _buildStars(context, this.seller.rating()),
-                  ),
-                ),
-              ]))
-        ],
-      ))),
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              new Hero(
+                  tag: "icon-${this.seller.id}",
+                  child: new Container(
+                      width: 60.0,
+                      height: 60.0,
+                      padding: EdgeInsets.all(8.0),
+                      child:
+                          new Image.asset('assets/images/durian-badge.png'))),
+              new Container(
+                  child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                    new Text(
+                      this.seller.name,
+                      style: new TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600),
+                    ),
+                    new Container(
+                      child: new Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: _buildStars(context, this.seller.rating()),
+                      ),
+                    ),
+                  ]))
+            ],
+          ))),
       body: _buildLists(context, seller),
     );
   }
@@ -183,7 +186,10 @@ class DetailPage extends StatelessWidget {
       fontSize: 25.0,
     );
     final _descStyle = new TextStyle(
-        color: Colors.black, fontWeight: FontWeight.w400, fontSize: 20.0);
+      color: Colors.black,
+      fontWeight: FontWeight.w400,
+      fontSize: 14.0,
+    );
     final _price = listing.price.toStringAsFixed(2);
     return new Container(
       padding: EdgeInsets.all(20.0),
@@ -209,7 +215,10 @@ class DetailPage extends StatelessWidget {
                 ),
                 new Container(
                   padding: EdgeInsets.only(left: 10.0),
-                  child: new Text(listing.type, style: _descStyle),
+                  child: new Text(
+                    listing.description,
+                    style: _descStyle,
+                  ),
                 ),
               ],
             ),
@@ -236,45 +245,59 @@ class DetailPage extends StatelessWidget {
     final _titleStyle = new TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.w700,
-      fontSize: 28.0,
+      fontSize: 22.0,
     );
     final _priceStyle = new TextStyle(
       color: Colors.white,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w400,
       fontSize: 25.0,
     );
-    return new Container(
-      color: Colors.white,
-      padding: EdgeInsets.all(20.0),
-      child: new Container(
-          color: Theme.of(context).primaryColor,
-          padding: EdgeInsets.all(40.0),
-          child: new Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                width: 100.0,
-                height: 100.0,
-                child: Image.asset("assets/images/logo.png"),
-              ),
-              new Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    drop.type,
-                    style: _titleStyle,
-                    textAlign: TextAlign.left,
-                  ),
-                  Text(
-                    "${drop.deadline} days left.",
-                    style: _priceStyle,
-                    textAlign: TextAlign.left,
-                  ),
-                ],
-              ),
-            ],
-          )),
-    );
+
+    return new GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+              new MaterialPageRoute(builder: (contxt) => new DropPage(drop)));
+        },
+        child: new Hero(
+            tag: "slab-${drop.id}",
+            child: new Container(
+              color: Colors.white,
+              padding: EdgeInsets.all(20.0),
+              child: new Container(
+                  color: Theme.of(context).primaryColor,
+                  padding: EdgeInsets.only(top: 40.0, bottom: 40.0),
+                  child: new Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      new Hero(
+                        tag: "ico${drop.id}",
+                        child: Container(
+                          width: 100.0,
+                          height: 100.0,
+                          child: Image.asset("assets/images/logo.png"),
+                        ),
+                      ),
+                      new Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          new Text(
+                            drop.type,
+                            style: _titleStyle,
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          new Text(
+                            "${drop.deadline} days left.",
+                            style: _priceStyle,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
+                      ),
+                    ],
+                  )),
+            )));
   }
 
   List<Widget> _buildStars(BuildContext context, num rating) {

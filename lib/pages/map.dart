@@ -28,6 +28,7 @@ class MapPage extends StatelessWidget {
           height: 32.0,
           point: i.location,
           builder: (ctx) => new GestureDetector(
+                behavior: HitTestBehavior.opaque,
                 onTap: () {
                   Navigator.of(ctx).push(new MaterialPageRoute(
                       builder: (ctx) => new DetailPage(i)));
