@@ -83,7 +83,9 @@ class ListPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          new Container(child: new Image.asset(seller.image)),
+          new Hero(
+              tag: "icon${seller.id}",
+              child: new Container(child: new Image.asset(seller.image))),
           new Container(
             child: new Column(
               mainAxisSize: MainAxisSize.min,

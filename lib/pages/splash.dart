@@ -20,9 +20,7 @@ class SplashPageState extends State<SplashPage> {
   }
 
   void redirectLanding() {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) {
-      return LandingPage();
-    }));
+    Navigator.of(context).pushReplacementNamed("/Landing");
   }
 
   @override

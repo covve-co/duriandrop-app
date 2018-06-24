@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './map.dart';
 
 class LandingPage extends StatelessWidget {
   @override
@@ -63,7 +64,7 @@ class LandingPage extends StatelessWidget {
                   color: new Color(0xFFFFFFFF),
                   disabledColor: new Color(0xFFFFFFFF),
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed('/Map');
+                    Navigator.of(context).pushReplacementNamed("/Map");
                   },
                 )),
           ],
