@@ -72,8 +72,10 @@ class ListPage extends StatelessWidget {
 
   Widget _buildRow(BuildContext context, Seller seller) {
     final _titleStyle = new TextStyle(color: Theme.of(context).primaryColor);
-    final _addressStyle =
-        new TextStyle(color: Colors.black, fontWeight: FontWeight.w400);
+    final _addressStyle = new TextStyle(
+      color: Colors.black,
+      fontWeight: FontWeight.w400,
+    );
     return new InkWell(
       onTap: () {
         Navigator.of(context).push(new MaterialPageRoute(
@@ -81,12 +83,12 @@ class ListPage extends StatelessWidget {
       },
       child: new Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           new Hero(
               tag: "icon${seller.id}",
               child: new Container(child: new Image.asset(seller.image))),
-          new Container(
+          new Flexible(
+              child: new Container(
             child: new Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,15 +97,19 @@ class ListPage extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10.0),
                   child: new Text(seller.name, style: _titleStyle),
                 ),
-                new Container(
-                    padding: EdgeInsets.only(left: 10.0),
-                    child: new Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        new Icon(Icons.location_on, color: Colors.red),
-                        new Text(seller.address, style: _addressStyle),
-                      ],
-                    )),
+                new Flexible(
+                    child: new Container(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: new Row(
+                          children: <Widget>[
+                            new Icon(Icons.location_on, color: Colors.red),
+                            new Text(
+                              seller.address,
+                              style: _addressStyle,
+                              overflow: TextOverflow.clip,
+                            ),
+                          ],
+                        ))),
                 new Container(
                   padding: EdgeInsets.only(left: 10.0),
                   child: new Row(
@@ -112,7 +118,7 @@ class ListPage extends StatelessWidget {
                 ),
               ],
             ),
-          ),
+          )),
         ],
       ),
     );

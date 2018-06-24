@@ -9,6 +9,9 @@ import 'package:flutter_map/flutter_map.dart';
 class DetailPage extends StatelessWidget {
   final Seller seller;
   DetailPage(this.seller);
+  bool reviewHeaderRendered = false;
+  bool listingHeaderRendered = false;
+  bool dropHeaderRendered = false;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -136,12 +139,21 @@ class DetailPage extends StatelessWidget {
   }
 
   Widget _buildReview(BuildContext context, Review review) {
+    var header = new Container();
+    if (!reviewHeaderRendered) {
+      reviewHeaderRendered = !reviewHeaderRendered;
+      header = new Container(
+          padding: EdgeInsets.all(16.0),
+          child: new Text("Reviews",
+              style: new TextStyle(fontSize: 23.0, color: Colors.black)));
+    }
     return new Container(
       padding: EdgeInsets.all(35.0),
       child: new Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+            header,
             new Column(children: <Widget>[
               new Column(children: <Widget>[
                 new Container(
@@ -191,41 +203,52 @@ class DetailPage extends StatelessWidget {
       fontSize: 14.0,
     );
     final _price = listing.price.toStringAsFixed(2);
+    var header = new Container();
+    if (!listingHeaderRendered) {
+      listingHeaderRendered = !listingHeaderRendered;
+      header = new Container(
+          padding: EdgeInsets.all(16.0),
+          child: new Text("Listings",
+              style: new TextStyle(fontSize: 23.0, color: Colors.black)));
+    }
     return new Container(
-      padding: EdgeInsets.all(20.0),
-      child: new Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          new Container(child: new Image.asset(listing.image)),
-          new Flexible(child: new Container(
-            padding: EdgeInsets.only(top: 10.0),
-            child: new Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new Container(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: new Text("~\$$_price\/kg", style: _priceStyle),
+        padding: EdgeInsets.all(20.0),
+        child: new Column(children: [
+          header,
+          new Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              new Container(child: new Image.asset(listing.image)),
+              new Flexible(
+                  child: new Container(
+                padding: EdgeInsets.only(top: 10.0),
+                child: new Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Container(
+                      padding: EdgeInsets.only(left: 10.0),
+                      child: new Text("~\$$_price\/kg", style: _priceStyle),
+                    ),
+                    new Container(
+                      padding: EdgeInsets.only(left: 10.0),
+                      child: new Text(listing.type, style: _titleStyle),
+                    ),
+                    new Container(
+                      padding: EdgeInsets.only(left: 10.0),
+                      child: new Text(
+                        listing.description,
+                        style: _descStyle,
+                      ),
+                    ),
+                  ],
                 ),
-                new Container(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: new Text(listing.type, style: _titleStyle),
-                ),
-                new Container(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: new Text(
-                    listing.description,
-                    style: _descStyle,
-                  ),
-                ),
-              ],
-            ),
-          )),
-        ],
-      ),
-    );
+              )),
+            ],
+          )
+        ]));
   }
 
   // Widget _dropTitle(BuildContext context) {
@@ -245,15 +268,27 @@ class DetailPage extends StatelessWidget {
     final _titleStyle = new TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.w700,
+      fontFamily: 'Poppins',
+      decoration: TextDecoration.none,
       fontSize: 22.0,
     );
     final _priceStyle = new TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.w400,
+      fontFamily: 'Poppins',
+      decoration: TextDecoration.none,
       fontSize: 25.0,
     );
+    var header = new Container();
+    if (!dropHeaderRendered) {
+      dropHeaderRendered = !dropHeaderRendered;
+      header = new Container(
+          padding: EdgeInsets.all(16.0),
+          child: new Text("Drops",
+              style: new TextStyle(fontSize: 23.0, color: Colors.black)));
+    }
 
-    return new GestureDetector(
+    return new Column(children: [header, new GestureDetector(
         onTap: () {
           Navigator.of(context).push(
               new MaterialPageRoute(builder: (contxt) => new DropPage(drop)));
@@ -297,7 +332,7 @@ class DetailPage extends StatelessWidget {
                       ),
                     ],
                   )),
-            )));
+            )))]);
   }
 
   List<Widget> _buildStars(BuildContext context, num rating) {

@@ -50,9 +50,9 @@ class Database {
   ];
 
   static final drops = [
-    new Drop("0", maoShanWang, 18.5, deadline: 3),
-    new Drop("1", d101, 15.5, deadline: 4),
-    new Drop("2", goldenPhoenix, 37.2, deadline: 5),
+    new Drop("0", maoShanWang, 18.5, deadline: 3, progress: 0.3),
+    new Drop("1", d101, 15.5, deadline: 4, progress: 0.5),
+    new Drop("2", goldenPhoenix, 37.2, deadline: 5, progress: 0.9),
   ];
 
   static final listings = [
@@ -68,7 +68,7 @@ class Database {
     new Listing("6", d101Desc, d101, "assets/images/durian-D101.png", 12.5),
     new Listing("7", d1Desc, d1, "assets/images/durian-D1.png", 5.7),
     new Listing("8", d101Desc, d101, "assets/images/durian-D101.png", 12.22),
-    new Listing("9", maoShanWangDesc, maoShanWangDesc,
+    new Listing("9", maoShanWangDesc, maoShanWang,
         "assets/images/durian-MSW.png", 30.34),
   ];
 
@@ -80,6 +80,7 @@ class Database {
       reviews: [sellerReviews[0], sellerReviews[3], sellerReviews[7]],
       listings: [listings[0], listings[1], listings[2]],
       drops: [drops[0], drops[1], drops[2]],
+      address: "1 Fusionopolis Walk Singapore 138628",
     ),
     new Seller(
       "2",
@@ -88,6 +89,7 @@ class Database {
       reviews: [sellerReviews[1], sellerReviews[6]],
       listings: [listings[3]],
       drops: [drops[0], drops[1], drops[2]],
+      address: "249 Balestier Road Singapore 329727",
     ),
     new Seller(
       "3",
@@ -96,6 +98,7 @@ class Database {
       reviews: [sellerReviews[2], sellerReviews[5], sellerReviews[8]],
       listings: [listings[5]],
       drops: [drops[0], drops[1], drops[2]],
+      address: "Jurong West Ave 2 Singapore 823799",
     ),
     new Seller(
       "4",
@@ -104,6 +107,7 @@ class Database {
       reviews: [sellerReviews[4]],
       listings: [listings[6], listings[7]],
       drops: [drops[0], drops[1], drops[2]],
+      address: "Changi Road Singapore 861232",
     ),
     new Seller(
       "5",
@@ -112,6 +116,7 @@ class Database {
       reviews: [sellerReviews[10], sellerReviews[11]],
       listings: [listings[8]],
       drops: [drops[0], drops[1], drops[2]],
+      address: "Tan Ah Kow Singapore 017379",
     ),
     new Seller(
       "6",
@@ -120,6 +125,7 @@ class Database {
       reviews: [sellerReviews[9]],
       listings: [listings[9]],
       drops: [drops[0], drops[1], drops[2]],
+      address: "Lim Thye Road Singapore 057852",
     ),
     new Seller(
       "7",
@@ -128,6 +134,7 @@ class Database {
       reviews: [sellerReviews[11]],
       listings: [listings[4]],
       drops: [drops[0], drops[1], drops[2]],
+      address: "1 Technology Drive Singapore 132879",
     ),
   ];
   static final orders = <Order>[
