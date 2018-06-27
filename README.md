@@ -1,8 +1,4 @@
-# duriandrop
+# DurianDrop
+A project made for AngelHack Singapore 2018.
 
-A new Flutter project.
-
-## Getting Started
-
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+http://www.hackathon.io/duriandrop
