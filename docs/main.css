@@ -1,0 +1,69 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translate(0, 5vh);
+    }
+
+    to {
+        transform: translate(0, 0);
+    }
+}
+
+body {
+    background: #66BB6A;
+    user-select: none;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    font-size: 20px;
+    animation: fadeIn 0.3s;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+}
+
+img {
+    object-fit: contain;
+    margin: 30px;
+}
+
+.logo {
+    flex: 12;
+}
+
+.mock {
+    flex: 12;
+    animation: slideUp 1s;
+}
+
+.content {
+    width: 500px;
+    margin: auto;
+}
+
+footer {
+    margin: 50px 0 20px 0;
+}
+
+a {
+    text-decoration: none;
+    color: yellow;
+    border-bottom: 1px yellow dotted;
+}
+
+@media screen and (max-width: 550px) {
+    .content {
+        width: 250px;
+        margin: auto;
+    }
+}
