@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import './pages/detail.dart';
 import './pages/landing.dart';
 import './pages/map.dart';
 import './pages/splash.dart';
